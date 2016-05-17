@@ -50,13 +50,7 @@ class DBMetaballLoadingLayer: CALayer {
         }
     }
     
-    var loadingStyle: LoadingStyle = .Fill {
-        didSet {
-            print("loading style :\(self.loadingStyle)")
-            setNeedsDisplay()
-            displayIfNeeded()
-        }
-    }
+    var loadingStyle: LoadingStyle = .Fill
     
     override init() {
         super.init()
@@ -66,6 +60,9 @@ class DBMetaballLoadingLayer: CALayer {
     override init(layer: AnyObject) {
         if let layer = layer as? DBMetaballLoadingLayer {
             movingBallCenterX = layer.movingBallCenterX
+            loadingStyle = layer.loadingStyle
+            fillColor = layer.fillColor
+            strokeColor = layer.strokeColor
         }
         
         super.init(layer: layer)
