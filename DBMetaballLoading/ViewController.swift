@@ -26,36 +26,168 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var loadingView: DBMetaballLoadingView?
-
+    
+    @IBOutlet weak var loadingView: DBMetaballLoadingView!
+    
+    @IBOutlet weak var styleLabel: UILabel!
+    @IBOutlet weak var styleSwitcher: UISwitch!
+    
+    @IBOutlet weak var fillColorLabel: UILabel!
+    @IBOutlet weak var fillColorSlider: UISlider!
+    
+    @IBOutlet weak var strokeColorLabel: UILabel!
+    @IBOutlet weak var strokeColorSlider: UISlider!
+    
+    @IBOutlet weak var ballRadiusLabel: UILabel!
+    @IBOutlet weak var ballRadiusSlider: UISlider!
+    
+    @IBOutlet weak var maxDistanceLabel: UILabel!
+    @IBOutlet weak var maxDistanceSlider: UISlider!
+    
+    @IBOutlet weak var mvLabel: UILabel!
+    @IBOutlet weak var mvSlider: UISlider!
+    
+    
+    @IBOutlet weak var handleLenRateLabel: UILabel!
+    @IBOutlet weak var handleLenRateSlider: UISlider!
+    
+    @IBOutlet weak var spacingLabel: UILabel!
+    @IBOutlet weak var spacingSlider: UISlider!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 0.0, green: 26.0 / 255.0, blue: 42.0 / 255.0, alpha: 1.0)
+        self.title = "DBMetaballLoading"
         
-        let screenBounds = UIScreen.mainScreen().bounds
-        let loadingView = DBMetaballLoadingView(frame: CGRect(x: 20, y: 100, width: screenBounds.size.width - 40, height: 200))
-        loadingView.layer.borderColor = UIColor.redColor().CGColor
-        loadingView.layer.borderWidth = 1.0
-        self.view.addSubview(loadingView)
-        self.loadingView = loadingView
+        strokeColorSlider.value = 0.0
+        changeStrokeColor(strokeColorSlider)
         
-        let styleSwitcher = UISwitch(frame: CGRect(x: 0, y: CGRectGetMaxY(loadingView.frame) + 50, width: 100, height: 50))
-        styleSwitcher.center = CGPoint(x: screenBounds.size.width * 0.5, y: styleSwitcher.center.y)
-        self.view.addSubview(styleSwitcher)
-        styleSwitcher.on = true
-        styleSwitcher.addTarget(self, action: #selector(switchLoadingViewStyle), forControlEvents: UIControlEvents.TouchUpInside)
+        fillColorSlider.value = 0.0
+        changeFillColor(fillColorSlider)
+        
+        changeBallRadius(ballRadiusSlider)
+        changeMaxDistance(maxDistanceSlider)
+        changeMv(mvSlider)
+        changeHandleLenRate(handleLenRateSlider)
+        changeSpacing(spacingSlider)
     }
     
-    func switchLoadingViewStyle(switcher: UISwitch) {
-        if switcher.on {
-            swithMetaballLoadingStyle(.Fill)
+    @IBAction func switchLoadingViewStyle(sender: UISwitch) {
+        if sender.on {
+            styleLabel.text = "loadingStyle: Fill"
+            loadingView.loadingStyle = .Fill
         } else {
-            swithMetaballLoadingStyle(.Stroke)
+            styleLabel.text = "loadingStyle: Stroke"
+            loadingView.loadingStyle = .Stroke
         }
     }
     
-    func swithMetaballLoadingStyle(style: LoadingStyle) {
-        loadingView?.loadingStyle = style
+    @IBAction func changeFillColor(sender: UISlider) {
+        styleSwitcher.setOn(true, animated: true)
+        switchLoadingViewStyle(styleSwitcher)
+        
+        fillColorLabel.textColor = _colorByIndex(NSInteger(sender.value))
+        loadingView.fillColor = fillColorLabel.textColor
+        sender.minimumTrackTintColor = fillColorLabel.textColor
+        sender.thumbTintColor = fillColorLabel.textColor
+    }
+    
+    @IBAction func changeStrokeColor(sender: UISlider) {
+        styleSwitcher.setOn(false, animated: true)
+        switchLoadingViewStyle(styleSwitcher)
+        
+        strokeColorLabel.textColor = _colorByIndex(NSInteger(sender.value))
+        loadingView.strokeColor = strokeColorLabel.textColor
+        sender.minimumTrackTintColor = strokeColorLabel.textColor
+        sender.thumbTintColor = strokeColorLabel.textColor
+    }
+    
+    @IBAction func changeBallRadius(sender: UISlider) {
+        ballRadiusLabel.text = String(format: "ballRadius %.2f", sender.value)
+        loadingView.ballRadius = CGFloat(sender.value)
+        loadingView.resetAnimation()
+        
+        maxDistanceSlider.minimumValue = ballRadiusSlider.minimumValue * 4
+        maxDistanceSlider.maximumValue = ballRadiusSlider.maximumValue * 4
+    }
+    
+    @IBAction func changeMaxDistance(sender: UISlider) {
+        maxDistanceLabel.text = String(format: "maxDistance %.2f", sender.value)
+        loadingView.maxDistance = CGFloat(sender.value)
+        loadingView.resetAnimation()
+    }
+    
+    @IBAction func changeMv(sender: UISlider) {
+        styleSwitcher.setOn(false, animated: true)
+        switchLoadingViewStyle(styleSwitcher)
+        
+        mvLabel.text = String(format: "mv: %.2f", sender.value)
+        loadingView.mv = CGFloat(sender.value)
+        loadingView.resetAnimation()
+    }
+    
+    @IBAction func changeHandleLenRate(sender: UISlider) {
+        styleSwitcher.setOn(false, animated: true)
+        switchLoadingViewStyle(styleSwitcher)
+        
+        handleLenRateLabel.text = String(format: "hanleLenRate: %.2f", sender.value)
+        loadingView.handleLenRate = CGFloat(sender.value)
+        loadingView.resetAnimation()
+    }
+    
+    @IBAction func changeSpacing(sender: UISlider) {
+        spacingLabel.text = String(format: "spacing: %.2f", sender.value)
+        loadingView.spacing = CGFloat(sender.value)
+        loadingView.resetAnimation()
+    }
+    
+    @IBAction func resetConfig(sender: UIButton) {
+        strokeColorSlider.value = 0.0
+        changeStrokeColor(strokeColorSlider)
+        
+        fillColorSlider.value = 0.0
+        changeFillColor(fillColorSlider)
+        
+        ballRadiusSlider.value = Float(DefaultConfig.radius)
+        changeBallRadius(ballRadiusSlider)
+        
+        maxDistanceSlider.value = Float(DefaultConfig.maxDistance)
+        changeMaxDistance(maxDistanceSlider)
+        
+        mvSlider.value = Float(DefaultConfig.mv)
+        changeMv(mvSlider)
+        
+        handleLenRateSlider.value = Float(DefaultConfig.handleLenRate)
+        changeHandleLenRate(handleLenRateSlider)
+        
+        spacingSlider.value = Float(DefaultConfig.spacing)
+        changeSpacing(spacingSlider)
+    }
+    
+    func _colorByIndex(index: NSInteger) -> UIColor {
+        var color = UIColor.blackColor()
+        switch index {
+        case 0:
+            color = UIColor.orangeColor()
+            break
+        case 1:
+            color = UIColor.yellowColor()
+            break
+        case 2:
+            color = UIColor.greenColor()
+            break
+        case 3:
+            color = UIColor.cyanColor()
+            break
+        case 4:
+            color = UIColor.redColor()
+            break
+        default:
+            color = UIColor.blueColor()
+        }
+        
+        return color
     }
 }
 

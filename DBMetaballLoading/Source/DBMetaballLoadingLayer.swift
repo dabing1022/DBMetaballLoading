@@ -31,16 +31,28 @@ enum LoadingStyle {
 
 typealias DBVector2 = CGPoint
 class DBMetaballLoadingLayer: CALayer {
-    private var ITEM_COUNT = 6
-    private let ITEM_DIVIDER: CGFloat = 30.0
-    private var radius: CGFloat = 15.0
+    private let ITEM_COUNT = 6
     private let SCALE_RATE: CGFloat = 0.3
-    private var handleLenRate: CGFloat = 2.0
-    var maxLength: CGFloat = 0.0
     private var circlePaths = [DBCircle]()
     
-    var fillColor: UIColor = UIColor(red: 67.0 / 255.0, green: 182.0 / 255.0, blue: 246.0 / 255.0, alpha: 1.0)
-    var strokeColor: UIColor = UIColor(red: 67.0 / 255.0, green: 182.0 / 255.0, blue: 246.0 / 255.0, alpha: 1.0)
+    var radius: CGFloat = DefaultConfig.radius
+    var maxLength: CGFloat {
+        get {
+            return (radius * 2 + spacing) * CGFloat(ITEM_COUNT)
+        }
+    }
+    var maxDistance: CGFloat = DefaultConfig.maxDistance
+    var mv: CGFloat = DefaultConfig.mv
+    var spacing: CGFloat = DefaultConfig.spacing {
+        didSet {
+            _adjustSpacing(spacing)
+        }
+    }
+    var handleLenRate: CGFloat = DefaultConfig.handleLenRate
+    
+    var fillColor: UIColor = DefaultConfig.fillColor
+    var strokeColor: UIColor = DefaultConfig.strokeColor
+    var loadingStyle: LoadingStyle = .Fill
     
     var movingBallCenterX : CGFloat = 0.0 {
         didSet {
@@ -49,8 +61,6 @@ class DBMetaballLoadingLayer: CALayer {
             }
         }
     }
-    
-    var loadingStyle: LoadingStyle = .Fill
     
     override init() {
         super.init()
@@ -63,11 +73,15 @@ class DBMetaballLoadingLayer: CALayer {
             loadingStyle = layer.loadingStyle
             fillColor = layer.fillColor
             strokeColor = layer.strokeColor
+            radius = layer.radius
+            maxDistance = layer.maxDistance
+            mv = layer.mv
+            handleLenRate = layer.handleLenRate
+            spacing = layer.spacing
         }
         
         super.init(layer: layer)
         _generalInit()
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -77,21 +91,20 @@ class DBMetaballLoadingLayer: CALayer {
     
     func _generalInit() {
         var circlePath = DBCircle()
-        circlePath.center = CGPoint(x: radius + ITEM_DIVIDER, y: radius * (1.0 + SCALE_RATE))
+        circlePath.center = CGPoint(x: radius, y: radius * (1.0 + SCALE_RATE))
         circlePath.radius = radius * 3 / 4
         circlePaths.append(circlePath)
         
         for i in 1..<ITEM_COUNT {
             circlePath = DBCircle()
-            circlePath.center = CGPoint(x: (radius * 2 + ITEM_DIVIDER) * CGFloat(i), y: radius * (1.0 + SCALE_RATE))
+            circlePath.center = CGPoint(x: (radius * 2 + spacing) * CGFloat(i), y: radius * (1.0 + SCALE_RATE))
             circlePath.radius = radius
             circlePaths.append(circlePath)
         }
-        maxLength = (radius * 2 + ITEM_DIVIDER) * CGFloat(ITEM_COUNT)
         
         self.allowsEdgeAntialiasing = true
     }
-
+    
     override class func needsDisplayForKey(key: String) -> Bool {
         if (key == "movingBallCenterX") {
             return true
@@ -119,7 +132,7 @@ class DBMetaballLoadingLayer: CALayer {
         
         _renderPath(UIBezierPath(ovalInRect: movingCircle.frame))
         for j in 1..<circlePaths.count {
-            _metaball(j, i: 0, v: 0.6, handeLenRate: handleLenRate, maxDistance: radius * 4)
+            _metaball(j, i: 0, v: mv, handeLenRate: handleLenRate, maxDistance: maxDistance)
         }
         
         UIGraphicsPopContext()
@@ -137,6 +150,15 @@ class DBMetaballLoadingLayer: CALayer {
     
     func _length(point: CGPoint) -> CGFloat {
         return sqrt(point.x * point.x + point.y * point.y)
+    }
+    
+    func _adjustSpacing(spacing: CGFloat) {
+        if (ITEM_COUNT > 1 && circlePaths.count > 1) {
+            for i in 1..<ITEM_COUNT {
+                var circlePath = circlePaths[i]
+                circlePath.center = CGPoint(x: (radius * 2 + spacing) * CGFloat(i), y: radius * (1.0 + SCALE_RATE))
+            }
+        }
     }
     
     func _renderPath(path: UIBezierPath) {

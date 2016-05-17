@@ -32,6 +32,47 @@ class DBMetaballLoadingView: UIView {
             (self.layer as! DBMetaballLoadingLayer).loadingStyle = loadingStyle
         }
     }
+    var fillColor: UIColor = DefaultConfig.fillColor {
+        didSet {
+            (self.layer as! DBMetaballLoadingLayer).fillColor = fillColor
+        }
+    }
+    
+    var strokeColor: UIColor = DefaultConfig.strokeColor {
+        didSet {
+            (self.layer as! DBMetaballLoadingLayer).strokeColor = strokeColor
+        }
+    }
+    
+    var ballRadius: CGFloat = DefaultConfig.radius {
+        didSet {
+            (self.layer as! DBMetaballLoadingLayer).radius = ballRadius
+        }
+    }
+    
+    var maxDistance: CGFloat = DefaultConfig.maxDistance {
+        didSet {
+            (self.layer as! DBMetaballLoadingLayer).maxDistance = maxDistance
+        }
+    }
+    
+    var mv: CGFloat = DefaultConfig.mv {
+        didSet {
+            (self.layer as! DBMetaballLoadingLayer).mv = mv
+        }
+    }
+    
+    var handleLenRate: CGFloat = DefaultConfig.handleLenRate {
+        didSet {
+            (self.layer as! DBMetaballLoadingLayer).handleLenRate = handleLenRate
+        }
+    }
+    
+    var spacing: CGFloat = DefaultConfig.spacing {
+        didSet {
+            (self.layer as! DBMetaballLoadingLayer).spacing = spacing
+        }
+    }
     
     init() {
         super.init(frame: CGRectZero)
@@ -66,11 +107,16 @@ class DBMetaballLoadingView: UIView {
         loadingAnimation = CABasicAnimation(keyPath: "movingBallCenterX")
         loadingAnimation!.duration = 2.5
         loadingAnimation!.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        loadingAnimation!.fromValue = NSNumber(float: Float(loadingLayer.movingBallCenterX))
-        loadingAnimation!.toValue = NSNumber(float: Float(loadingLayer.maxLength))
+        loadingAnimation!.fromValue = NSNumber(float: Float(loadingLayer.radius))
+        loadingAnimation!.toValue = NSNumber(float: Float(loadingLayer.maxLength - loadingLayer.radius))
         loadingAnimation!.repeatCount = Float.infinity
         loadingAnimation!.autoreverses = true
         loadingLayer.addAnimation(loadingAnimation!, forKey: "loading")
+    }
+    
+    func resetAnimation() {
+        self.layer.removeAnimationForKey("loading")
+        startAnimation()
     }
     
     func resumeAnimation() {

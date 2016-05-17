@@ -34,3 +34,13 @@ struct DBCircle {
         }
     }
 }
+
+struct DefaultConfig {
+    static let radius: CGFloat = 15.0
+    static let fillColor = UIColor(red: 67.0 / 255.0, green: 182.0 / 255.0, blue: 246.0 / 255.0, alpha: 1.0)
+    static let strokeColor = UIColor(red: 67.0 / 255.0, green: 182.0 / 255.0, blue: 246.0 / 255.0, alpha: 1.0)
+    static let mv: CGFloat = 0.6
+    static let maxDistance: CGFloat = 4 * DefaultConfig.radius
+    static let handleLenRate: CGFloat = 2.0
+    static let spacing: CGFloat = 30.0
+}
