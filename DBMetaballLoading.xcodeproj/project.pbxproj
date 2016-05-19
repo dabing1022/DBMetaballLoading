@@ -15,6 +15,7 @@
 		BDE8A0921CE9753100156166 /* DBMetaballLoadingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8A0901CE9753100156166 /* DBMetaballLoadingLayer.swift */; };
 		BDE8A0931CE9753100156166 /* DBMetaballLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8A0911CE9753100156166 /* DBMetaballLoadingView.swift */; };
 		BDE8A0951CE99B3D00156166 /* DBCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8A0941CE99B3D00156166 /* DBCircle.swift */; };
+		BDF050DC1CED64C800003E7E /* CGPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF050DB1CED64C800003E7E /* CGPointExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		BDE8A0901CE9753100156166 /* DBMetaballLoadingLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBMetaballLoadingLayer.swift; sourceTree = "<group>"; };
 		BDE8A0911CE9753100156166 /* DBMetaballLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBMetaballLoadingView.swift; sourceTree = "<group>"; };
 		BDE8A0941CE99B3D00156166 /* DBCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBCircle.swift; sourceTree = "<group>"; };
+		BDF050DB1CED64C800003E7E /* CGPointExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPointExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				BDE8A0941CE99B3D00156166 /* DBCircle.swift */,
 				BDE8A0901CE9753100156166 /* DBMetaballLoadingLayer.swift */,
 				BDE8A0911CE9753100156166 /* DBMetaballLoadingView.swift */,
+				BDF050DB1CED64C800003E7E /* CGPointExtension.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -154,6 +157,7 @@
 			files = (
 				BDE8A0921CE9753100156166 /* DBMetaballLoadingLayer.swift in Sources */,
 				BDE8A07B1CE96D6800156166 /* ViewController.swift in Sources */,
+				BDF050DC1CED64C800003E7E /* CGPointExtension.swift in Sources */,
 				BDE8A0791CE96D6800156166 /* AppDelegate.swift in Sources */,
 				BDE8A0931CE9753100156166 /* DBMetaballLoadingView.swift in Sources */,
 				BDE8A0951CE99B3D00156166 /* DBCircle.swift in Sources */,

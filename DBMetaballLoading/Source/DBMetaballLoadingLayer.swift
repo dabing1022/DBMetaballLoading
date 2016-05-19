@@ -29,7 +29,6 @@ enum LoadingStyle {
     case Fill
 }
 
-typealias DBVector2 = CGPoint
 class DBMetaballLoadingLayer: CALayer {
     private let MOVE_BALL_SCALE_RATE: CGFloat = 0.75
     private let ITEM_COUNT = 6
@@ -132,20 +131,6 @@ class DBMetaballLoadingLayer: CALayer {
         UIGraphicsPopContext()
     }
     
-    func _vector2By(radians radians: CGFloat, length: CGFloat) -> DBVector2 {
-        return DBVector2(x: length * cos(radians), y: length * sin(radians))
-    }
-    
-    func _distance(point1 point1: CGPoint, point2: CGPoint) -> CGFloat {
-        let deltaX = point1.x - point2.x
-        let deltaY = point1.y - point2.y
-        return sqrt(deltaX * deltaX + deltaY * deltaY)
-    }
-    
-    func _length(point: CGPoint) -> CGFloat {
-        return sqrt(point.x * point.x + point.y * point.y)
-    }
-    
     func _adjustSpacing(spacing: CGFloat) {
         if (ITEM_COUNT > 1 && circlePaths.count > 1) {
             for i in 1..<ITEM_COUNT {
@@ -168,7 +153,7 @@ class DBMetaballLoadingLayer: CALayer {
         let center1 = circle1.center
         let center2 = circle2.center
         
-        let d = _distance(point1: center1, point2: center2)
+        let d = center1.distance(center2)
         
         var radius1 = circle1.radius
         var radius2 = circle2.radius
@@ -197,42 +182,34 @@ class DBMetaballLoadingLayer: CALayer {
             u2 = 0.0
         }
         
-        let centerMin = CGPoint(x: center2.x - center1.x, y: center2.y - center1.y)
-        
-        let angle1 = atan2(centerMin.y, centerMin.x)
+        let angle1 = center1.angleBetween(center2)
         let angle2 = acos((radius1 - radius2) / d)
         let angle1a = angle1 + u1 + (angle2 - u1) * v
         let angle1b = angle1 - u1 - (angle2 - u1) * v
         let angle2a = angle1 + CGFloat(M_PI) - u2 - (CGFloat(M_PI) - u2 - angle2) * v
         let angle2b = angle1 - CGFloat(M_PI) + u2 + (CGFloat(M_PI) - u2 - angle2) * v
         
-        let p1a1 = _vector2By(radians: angle1a, length: radius1)
-        let p1b1 = _vector2By(radians: angle1b, length: radius1)
-        let p2a1 = _vector2By(radians: angle2a, length: radius2)
-        let p2b1 = _vector2By(radians: angle2b, length: radius2)
+        let p1a = center1.point(radians: angle1a, withLength: radius1)
+        let p1b = center1.point(radians: angle1b, withLength: radius1)
+        let p2a = center2.point(radians: angle2a, withLength: radius2)
+        let p2b = center2.point(radians: angle2b, withLength: radius2)
         
-        let p1a = CGPoint(x: p1a1.x + center1.x, y: p1a1.y + center1.y)
-        let p1b = CGPoint(x: p1b1.x + center1.x, y: p1b1.y + center1.y)
-        let p2a = CGPoint(x: p2a1.x + center2.x, y: p2a1.y + center2.y)
-        let p2b = CGPoint(x: p2b1.x + center2.x, y: p2b1.y + center2.y)
-        
-        let p1_p2 = CGPoint(x: p1a.x - p2a.x, y: p1a.y - p2a.y)
         let totalRadius = radius1 + radius2
-        var d2 = min(v * handeLenRate, _length(p1_p2) / totalRadius)
+        var d2 = min(v * handeLenRate, p1a.minus(p2a).length() / totalRadius)
         d2 *= min(1, d * 2 / totalRadius)
         radius1 *= d2
         radius2 *= d2
         
-        let sp1 = _vector2By(radians: angle1a - CGFloat(M_PI_2), length: radius1)
-        let sp2 = _vector2By(radians: angle2a + CGFloat(M_PI_2), length: radius2)
-        let sp3 = _vector2By(radians: angle2b - CGFloat(M_PI_2), length: radius2)
-        let sp4 = _vector2By(radians: angle1b + CGFloat(M_PI_2), length: radius1)
+        let cp1a = p1a.point(radians: angle1a - CGFloat(M_PI_2), withLength: radius1)
+        let cp2a = p2a.point(radians: angle2a + CGFloat(M_PI_2), withLength: radius2)
+        let cp2b = p2b.point(radians: angle2b - CGFloat(M_PI_2), withLength: radius2)
+        let cp1b = p1b.point(radians: angle1b + CGFloat(M_PI_2), withLength: radius1)
         
         let pathJoinedCircles = UIBezierPath()
         pathJoinedCircles.moveToPoint(p1a)
-        pathJoinedCircles.addCurveToPoint(p2a, controlPoint1: CGPoint(x: p1a.x + sp1.x, y: p1a.y + sp1.y), controlPoint2: CGPoint(x: p2a.x + sp2.x, y: p2a.y + sp2.y))
+        pathJoinedCircles.addCurveToPoint(p2a, controlPoint1: cp1a, controlPoint2: cp2a)
         pathJoinedCircles.addLineToPoint(p2b)
-        pathJoinedCircles.addCurveToPoint(p1b, controlPoint1: CGPoint(x: p2b.x + sp3.x, y:p2b.y + sp3.y), controlPoint2: CGPoint(x: p1b.x + sp4.x, y:p1b.y + sp4.y))
+        pathJoinedCircles.addCurveToPoint(p1b, controlPoint1: cp2b, controlPoint2: cp1b)
         pathJoinedCircles.addLineToPoint(p1a)
         pathJoinedCircles.closePath()
         _renderPath(pathJoinedCircles)
