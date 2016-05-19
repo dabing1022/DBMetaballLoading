@@ -31,6 +31,7 @@ enum LoadingStyle {
 
 typealias DBVector2 = CGPoint
 class DBMetaballLoadingLayer: CALayer {
+    private let MOVE_BALL_SCALE_RATE: CGFloat = 0.75
     private let ITEM_COUNT = 6
     private let SCALE_RATE: CGFloat = 0.3
     private var circlePaths = [DBCircle]()
@@ -90,19 +91,12 @@ class DBMetaballLoadingLayer: CALayer {
     }
     
     func _generalInit() {
-        var circlePath = DBCircle()
-        circlePath.center = CGPoint(x: radius, y: radius * (1.0 + SCALE_RATE))
-        circlePath.radius = radius * 3 / 4
-        circlePaths.append(circlePath)
-        
-        for i in 1..<ITEM_COUNT {
-            circlePath = DBCircle()
+        circlePaths = Array(0..<ITEM_COUNT).map { i in
+            var circlePath = DBCircle()
             circlePath.center = CGPoint(x: (radius * 2 + spacing) * CGFloat(i), y: radius * (1.0 + SCALE_RATE))
-            circlePath.radius = radius
-            circlePaths.append(circlePath)
+            circlePath.radius = i == 0 ? radius * MOVE_BALL_SCALE_RATE : radius
+            return circlePath
         }
-        
-        self.allowsEdgeAntialiasing = true
     }
     
     override class func needsDisplayForKey(key: String) -> Bool {
