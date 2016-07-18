@@ -10,26 +10,32 @@ A metaball loading written in Swift.
 
 Special thanks to [dodola](https://github.com/dodola)'s [MetaballLoading](https://github.com/dodola/MetaballLoading), which is an android project. The animation is awesome! So I implement it in Swift, DBMetaballLoading's core algorithm is referenced by it's core algorithm.
 
-# PreView
+# Preview
 
 ![DBMetaballLoading](http://7u2lyz.com1.z0.glb.clouddn.com/DBMetaballLoading.gif)
 
-# Code Example
+# Usage Example
 
-You can init a metaball loading view by `init(frame: CGRect)` or make an instance from `xib`/`storyboard`. Then there are several options you could config.
-
-```swift
-···
-loadingView.fillColor = ..
-loadingView.strokeColor = ..
-loadingView.ballRadius = ..
-loadingView.maxDistance = ..
-loadingView.mv = ..
-loadingView.handleRate = ..
-laodingView.spacing = ..
+``` swift
+let loadingView = DBMetaballLoadingView(frame: CGRect(x: 0, y: 100, width: 404, height: 50))
+self.view.addSubview(loadingView)
 ```
 
-These options all have default values. You can change them to satifiy your requirements. Please check demo to see more info.
+# Customizations
+
+* fillColor: UIColor
+* strokeColor: UIColor
+* ballRadius: CGFloat
+* maxDistance: CGFloat
+* mv: CGFloat
+* handleLenRate: CGFloat
+* spacing: spacing
+
+## Installation
+
+#### Manually
+1. Download and drop ```DBMetaballLoading/Source```folder in your project.  
+2. Congratulations!  
 
 # Requirements
 
