@@ -12,7 +12,7 @@ Special thanks to [dodola](https://github.com/dodola)'s [MetaballLoading](https:
 
 # Preview
 
-![DBMetaballLoading](http://7u2lyz.com1.z0.glb.clouddn.com/DBMetaballLoading.gif)
+![DBMetaballLoading](http://7u2lyz.com1.z0.glb.clouddn.com/DBMetaballLoadingDemo.gif)
 
 # Usage Example
 
