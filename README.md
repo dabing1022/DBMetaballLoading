@@ -33,7 +33,17 @@ self.view.addSubview(loadingView)
 
 ## Installation
 
+#### CocoaPods
+You can use CocoaPods to install `DBMetaballLoading` by adding it to your `Podfile`:
+
+```
+platform :ios, '8.0'
+use_frameworks!
+pod 'DBMetaballLoading'
+```
+
 #### Manually
+
 1. Download and drop ```DBMetaballLoading/Source```folder in your project.  
 2. Congratulations!  
 
