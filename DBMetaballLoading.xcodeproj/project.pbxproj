@@ -12,10 +12,11 @@
 		BDE8A07E1CE96D6800156166 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDE8A07C1CE96D6800156166 /* Main.storyboard */; };
 		BDE8A0801CE96D6800156166 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDE8A07F1CE96D6800156166 /* Assets.xcassets */; };
 		BDE8A0831CE96D6800156166 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDE8A0811CE96D6800156166 /* LaunchScreen.storyboard */; };
-		BDE8A0921CE9753100156166 /* DBMetaballLoadingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8A0901CE9753100156166 /* DBMetaballLoadingLayer.swift */; };
-		BDE8A0931CE9753100156166 /* DBMetaballLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8A0911CE9753100156166 /* DBMetaballLoadingView.swift */; };
-		BDE8A0951CE99B3D00156166 /* DBCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8A0941CE99B3D00156166 /* DBCircle.swift */; };
-		BDF050DC1CED64C800003E7E /* CGPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF050DB1CED64C800003E7E /* CGPointExtension.swift */; };
+		D58330C81D3C6804004355B0 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D58330C71D3C6804004355B0 /* README.md */; };
+		D58330CE1D3C681C004355B0 /* CGPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58330CA1D3C681C004355B0 /* CGPointExtension.swift */; };
+		D58330CF1D3C681C004355B0 /* DBCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58330CB1D3C681C004355B0 /* DBCircle.swift */; };
+		D58330D01D3C681C004355B0 /* DBMetaballLoadingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58330CC1D3C681C004355B0 /* DBMetaballLoadingLayer.swift */; };
+		D58330D11D3C681C004355B0 /* DBMetaballLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58330CD1D3C681C004355B0 /* DBMetaballLoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,10 +27,11 @@
 		BDE8A07F1CE96D6800156166 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BDE8A0821CE96D6800156166 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BDE8A0841CE96D6800156166 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BDE8A0901CE9753100156166 /* DBMetaballLoadingLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBMetaballLoadingLayer.swift; sourceTree = "<group>"; };
-		BDE8A0911CE9753100156166 /* DBMetaballLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBMetaballLoadingView.swift; sourceTree = "<group>"; };
-		BDE8A0941CE99B3D00156166 /* DBCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBCircle.swift; sourceTree = "<group>"; };
-		BDF050DB1CED64C800003E7E /* CGPointExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPointExtension.swift; sourceTree = "<group>"; };
+		D58330C71D3C6804004355B0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		D58330CA1D3C681C004355B0 /* CGPointExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPointExtension.swift; sourceTree = "<group>"; };
+		D58330CB1D3C681C004355B0 /* DBCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBCircle.swift; sourceTree = "<group>"; };
+		D58330CC1D3C681C004355B0 /* DBMetaballLoadingLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBMetaballLoadingLayer.swift; sourceTree = "<group>"; };
+		D58330CD1D3C681C004355B0 /* DBMetaballLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBMetaballLoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,8 +64,9 @@
 		BDE8A0771CE96D6800156166 /* DBMetaballLoading */ = {
 			isa = PBXGroup;
 			children = (
-				BDE8A08F1CE9753100156166 /* Source */,
+				D58330C91D3C681C004355B0 /* Source */,
 				BDE8A0781CE96D6800156166 /* AppDelegate.swift */,
+				D58330C71D3C6804004355B0 /* README.md */,
 				BDE8A07A1CE96D6800156166 /* ViewController.swift */,
 				BDE8A07C1CE96D6800156166 /* Main.storyboard */,
 				BDE8A07F1CE96D6800156166 /* Assets.xcassets */,
@@ -73,16 +76,16 @@
 			path = DBMetaballLoading;
 			sourceTree = "<group>";
 		};
-		BDE8A08F1CE9753100156166 /* Source */ = {
+		D58330C91D3C681C004355B0 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				BDE8A0941CE99B3D00156166 /* DBCircle.swift */,
-				BDE8A0901CE9753100156166 /* DBMetaballLoadingLayer.swift */,
-				BDE8A0911CE9753100156166 /* DBMetaballLoadingView.swift */,
-				BDF050DB1CED64C800003E7E /* CGPointExtension.swift */,
+				D58330CA1D3C681C004355B0 /* CGPointExtension.swift */,
+				D58330CB1D3C681C004355B0 /* DBCircle.swift */,
+				D58330CC1D3C681C004355B0 /* DBMetaballLoadingLayer.swift */,
+				D58330CD1D3C681C004355B0 /* DBMetaballLoadingView.swift */,
 			);
 			path = Source;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -155,12 +158,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDE8A0921CE9753100156166 /* DBMetaballLoadingLayer.swift in Sources */,
+				D58330C81D3C6804004355B0 /* README.md in Sources */,
 				BDE8A07B1CE96D6800156166 /* ViewController.swift in Sources */,
-				BDF050DC1CED64C800003E7E /* CGPointExtension.swift in Sources */,
+				D58330D01D3C681C004355B0 /* DBMetaballLoadingLayer.swift in Sources */,
+				D58330CE1D3C681C004355B0 /* CGPointExtension.swift in Sources */,
 				BDE8A0791CE96D6800156166 /* AppDelegate.swift in Sources */,
-				BDE8A0931CE9753100156166 /* DBMetaballLoadingView.swift in Sources */,
-				BDE8A0951CE99B3D00156166 /* DBCircle.swift in Sources */,
+				D58330D11D3C681C004355B0 /* DBMetaballLoadingView.swift in Sources */,
+				D58330CF1D3C681C004355B0 /* DBCircle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
