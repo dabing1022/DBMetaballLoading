@@ -23,7 +23,6 @@
 //
 
 import UIKit
-import GLKit
 
 class DBMetaballLoadingView: UIView {
     var loadingAnimation: CABasicAnimation?
