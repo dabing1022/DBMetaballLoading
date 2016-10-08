@@ -50,7 +50,7 @@ pod 'DBMetaballLoading'
 # Requirements
 
 - iOS8+
-- Swift2.0+
+- Swift3.0
 
 # Contribution
 
