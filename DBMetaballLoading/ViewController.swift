@@ -122,8 +122,8 @@ class ViewController: UIViewController {
         styleSwitcher.setOn(false, animated: true)
         switchLoadingViewStyle(styleSwitcher)
         
-        mvLabel.text = String(format: "mv: %.2f", sender.value)
-        loadingView.mv = CGFloat(sender.value)
+        mvLabel.text = String(format: "curveAngle: %.2f", sender.value)
+        loadingView.curveAngle = CGFloat(sender.value)
         loadingView.resetAnimation()
     }
     
@@ -155,7 +155,7 @@ class ViewController: UIViewController {
         maxDistanceSlider.value = Float(DefaultConfig.maxDistance)
         changeMaxDistance(maxDistanceSlider)
         
-        mvSlider.value = Float(DefaultConfig.mv)
+        mvSlider.value = Float(DefaultConfig.curveAngle)
         changeMv(mvSlider)
         
         handleLenRateSlider.value = Float(DefaultConfig.handleLenRate)

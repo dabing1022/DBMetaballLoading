@@ -55,9 +55,9 @@ class DBMetaballLoadingView: UIView {
         }
     }
     
-    var mv: CGFloat = DefaultConfig.mv {
+    var curveAngle: CGFloat = DefaultConfig.curveAngle {
         didSet {
-            (self.layer as! DBMetaballLoadingLayer).mv = mv
+            (self.layer as! DBMetaballLoadingLayer).curveAngle = curveAngle
         }
     }
     

@@ -27,7 +27,7 @@ self.view.addSubview(loadingView)
 * strokeColor: UIColor
 * ballRadius: CGFloat
 * maxDistance: CGFloat
-* mv: CGFloat
+* curveAngle: CGFloat
 * handleLenRate: CGFloat
 * spacing: spacing
 

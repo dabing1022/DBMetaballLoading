@@ -42,7 +42,7 @@ class DBMetaballLoadingLayer: CALayer {
         }
     }
     var maxDistance: CGFloat = DefaultConfig.maxDistance
-    var mv: CGFloat = DefaultConfig.mv
+    var curveAngle: CGFloat = DefaultConfig.curveAngle
     var spacing: CGFloat = DefaultConfig.spacing {
         didSet {
             _adjustSpacing(spacing: spacing)
@@ -75,7 +75,7 @@ class DBMetaballLoadingLayer: CALayer {
             strokeColor = layer.strokeColor
             radius = layer.radius
             maxDistance = layer.maxDistance
-            mv = layer.mv
+            curveAngle = layer.curveAngle
             handleLenRate = layer.handleLenRate
             spacing = layer.spacing
         }
@@ -125,7 +125,7 @@ class DBMetaballLoadingLayer: CALayer {
         
         _renderPath(path: UIBezierPath(ovalIn: movingCircle.frame))
         for j in 1..<circlePaths.count {
-            _metaball(j: j, i: 0, v: mv, handeLenRate: handleLenRate, maxDistance: maxDistance)
+            _metaball(j: j, i: 0, curveAngle: curveAngle, handeLenRate: handleLenRate, maxDistance: maxDistance)
         }
         
         UIGraphicsPopContext()
@@ -146,7 +146,7 @@ class DBMetaballLoadingLayer: CALayer {
         self.loadingStyle == .Fill ? path.fill() : path.stroke()
     }
 
-    func _metaball(j: Int, i: Int, v: CGFloat, handeLenRate: CGFloat, maxDistance: CGFloat) {
+    func _metaball(j: Int, i: Int, curveAngle: CGFloat, handeLenRate: CGFloat, maxDistance: CGFloat) {
         let circle1 = circlePaths[i]
         let circle2 = circlePaths[j]
         
@@ -184,10 +184,10 @@ class DBMetaballLoadingLayer: CALayer {
         
         let angle1 = center1.angleBetween(point: center2)
         let angle2 = acos((radius1 - radius2) / d)
-        let angle1a = angle1 + u1 + (angle2 - u1) * v
-        let angle1b = angle1 - u1 - (angle2 - u1) * v
-        let angle2a = angle1 + CGFloat(M_PI) - u2 - (CGFloat(M_PI) - u2 - angle2) * v
-        let angle2b = angle1 - CGFloat(M_PI) + u2 + (CGFloat(M_PI) - u2 - angle2) * v
+        let angle1a = angle1 + u1 + (angle2 - u1) * curveAngle
+        let angle1b = angle1 - u1 - (angle2 - u1) * curveAngle
+        let angle2a = angle1 + CGFloat(M_PI) - u2 - (CGFloat(M_PI) - u2 - angle2) * curveAngle
+        let angle2b = angle1 - CGFloat(M_PI) + u2 + (CGFloat(M_PI) - u2 - angle2) * curveAngle
         
         let p1a = center1.point(radians: angle1a, withLength: radius1)
         let p1b = center1.point(radians: angle1b, withLength: radius1)
@@ -195,7 +195,7 @@ class DBMetaballLoadingLayer: CALayer {
         let p2b = center2.point(radians: angle2b, withLength: radius2)
         
         let totalRadius = radius1 + radius2
-        var d2 = min(v * handeLenRate, p1a.minus(point: p2a).length() / totalRadius)
+        var d2 = min(curveAngle * handeLenRate, p1a.minus(point: p2a).length() / totalRadius)
         d2 *= min(1, d * 2 / totalRadius)
         radius1 *= d2
         radius2 *= d2
