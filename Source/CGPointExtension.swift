@@ -69,7 +69,7 @@ extension CGPoint {
         return sqrt(dx * dx + dy * dy)
     }
     
-    func point(radians radians: CGFloat, withLength length: CGFloat) -> CGPoint {
+    func point(radians: CGFloat, withLength length: CGFloat) -> CGPoint {
         return CGPoint(x: self.x + length * cos(radians), y: self.y + length * sin(radians))
     }
     
@@ -104,7 +104,7 @@ extension CGPoint {
     }
     
     func normalized() -> CGPoint {
-        return div(length())
+        return div(rhs: length())
     }
     
     func dot(point: CGPoint) -> CGFloat {
@@ -116,11 +116,11 @@ extension CGPoint {
     }
     
     func split(point: CGPoint, ratio: CGFloat) -> CGPoint {
-        return mul(ratio).plus(point.mul(1 - ratio))
+        return mul(rhs: ratio).plus(point: point.mul(rhs: 1 - ratio))
     }
     
     func mid(point: CGPoint) -> CGPoint {
-        return split(point, ratio: 0.5)
+        return split(point: point, ratio: 0.5)
     }
     
     func areaSize(point: CGPoint) -> CGSize {
@@ -128,7 +128,7 @@ extension CGPoint {
     }
     
     func area(point: CGPoint) -> CGFloat {
-        let size = areaSize(point)
+        let size = areaSize(point: point)
         return size.width * size.height
     }
     

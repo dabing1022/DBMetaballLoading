@@ -74,7 +74,7 @@ class DBMetaballLoadingView: UIView {
     }
     
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         _generalInit()
     }
     
@@ -89,15 +89,15 @@ class DBMetaballLoadingView: UIView {
     }
     
     func _generalInit() {
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(resumeAnimation), name: UIApplicationWillEnterForegroundNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(pauseAnimation), name: UIApplicationDidEnterBackgroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(resumeAnimation), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(pauseAnimation), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
 
         startAnimation()
     }
     
-    override class func layerClass() -> AnyClass {
+    override class var layerClass : AnyClass {
         return DBMetaballLoadingLayer.self
     }
     
@@ -106,32 +106,33 @@ class DBMetaballLoadingView: UIView {
         loadingAnimation = CABasicAnimation(keyPath: "movingBallCenterX")
         loadingAnimation!.duration = 2.5
         loadingAnimation!.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        loadingAnimation!.fromValue = NSNumber(float: Float(loadingLayer.radius))
-        loadingAnimation!.toValue = NSNumber(float: Float(loadingLayer.maxLength - loadingLayer.radius))
+        
+        loadingAnimation!.fromValue = NSNumber(value: Float(loadingLayer.radius))
+        loadingAnimation!.toValue = NSNumber(value: Float(loadingLayer.maxLength - loadingLayer.radius))
         loadingAnimation!.repeatCount = Float.infinity
         loadingAnimation!.autoreverses = true
-        loadingLayer.addAnimation(loadingAnimation!, forKey: "loading")
+        loadingLayer.add(loadingAnimation!, forKey: "loading")
     }
     
     func resetAnimation() {
-        self.layer.removeAnimationForKey("loading")
+        self.layer.removeAnimation(forKey: "loading")
         startAnimation()
     }
     
     func resumeAnimation() {
         if let animation = loadingAnimation {
-            self.layer.addAnimation(animation, forKey: "loading")
+            self.layer.add(animation, forKey: "loading")
         }
-        resumeLayer(self.layer)
+        resumeLayer(layer: self.layer)
     }
     
     func pauseAnimation() {
-        loadingAnimation = self.layer.animationForKey("loading")?.copy() as? CABasicAnimation
-        pauseLayer(self.layer)
+        loadingAnimation = self.layer.animation(forKey: "loading")?.copy() as? CABasicAnimation
+        pauseLayer(layer: self.layer)
     }
     
     func pauseLayer(layer: CALayer) {
-        let pausedTime = layer .convertTime(CACurrentMediaTime(), fromLayer: nil)
+        let pausedTime = layer.convertTime(CACurrentMediaTime(), from: nil)
         layer.speed = 0.0
         layer.timeOffset = pausedTime
     }
@@ -141,7 +142,7 @@ class DBMetaballLoadingView: UIView {
         layer.speed = 1.0
         layer.timeOffset = 0.0
         layer.beginTime = 0.0
-        let timeSincePause = layer.convertTime(CACurrentMediaTime(), fromLayer: nil) - pausedTime
+        let timeSincePause = layer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
         layer.beginTime = timeSincePause
     }
 }

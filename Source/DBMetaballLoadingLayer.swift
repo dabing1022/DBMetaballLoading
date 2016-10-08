@@ -45,7 +45,7 @@ class DBMetaballLoadingLayer: CALayer {
     var mv: CGFloat = DefaultConfig.mv
     var spacing: CGFloat = DefaultConfig.spacing {
         didSet {
-            _adjustSpacing(spacing)
+            _adjustSpacing(spacing: spacing)
         }
     }
     var handleLenRate: CGFloat = DefaultConfig.handleLenRate
@@ -67,7 +67,7 @@ class DBMetaballLoadingLayer: CALayer {
         _generalInit()
     }
     
-    override init(layer: AnyObject) {
+    override init(layer: Any) {
         if let layer = layer as? DBMetaballLoadingLayer {
             movingBallCenterX = layer.movingBallCenterX
             loadingStyle = layer.loadingStyle
@@ -98,34 +98,34 @@ class DBMetaballLoadingLayer: CALayer {
         }
     }
     
-    override class func needsDisplayForKey(key: String) -> Bool {
+    override class func needsDisplay(forKey key: String) -> Bool {
         if (key == "movingBallCenterX") {
             return true
         }
         
-        return super.needsDisplayForKey(key)
+        return super.needsDisplay(forKey: key)
     }
     
-    override func actionForKey(event: String) -> CAAction? {
+    override func action(forKey event: String) -> CAAction? {
         if (event == "movingBallCenterX") {
             let animation = CABasicAnimation(keyPath: event)
-            animation.fromValue = self.presentationLayer()?.valueForKey(event)
+            animation.fromValue = self.presentation()?.value(forKey: event)
             
             return animation
         }
         
-        return super.actionForKey(event)
+        return super.action(forKey: event)
     }
     
-    override func drawInContext(ctx: CGContext) {
+    override func draw(in ctx: CGContext) {
         UIGraphicsPushContext(ctx)
         
         var movingCircle = circlePaths[0]
         movingCircle.center = CGPoint(x: movingBallCenterX, y: movingCircle.center.y)
         
-        _renderPath(UIBezierPath(ovalInRect: movingCircle.frame))
+        _renderPath(path: UIBezierPath(ovalIn: movingCircle.frame))
         for j in 1..<circlePaths.count {
-            _metaball(j, i: 0, v: mv, handeLenRate: handleLenRate, maxDistance: maxDistance)
+            _metaball(j: j, i: 0, v: mv, handeLenRate: handleLenRate, maxDistance: maxDistance)
         }
         
         UIGraphicsPopContext()
@@ -153,17 +153,17 @@ class DBMetaballLoadingLayer: CALayer {
         let center1 = circle1.center
         let center2 = circle2.center
         
-        let d = center1.distance(center2)
+        let d = center1.distance(point: center2)
         
         var radius1 = circle1.radius
         var radius2 = circle2.radius
         
         if (d > maxDistance) {
-            _renderPath(UIBezierPath(ovalInRect: circle2.frame))
+            _renderPath(path: UIBezierPath(ovalIn: circle2.frame))
         } else {
             let scale2 = 1 + SCALE_RATE * (1 - d / maxDistance)
             radius2 *= scale2
-            _renderPath(UIBezierPath(ovalInRect: CGRect(x: circle2.center.x - radius2, y: circle2.center.y - radius2, width: 2 * radius2, height: 2 * radius2)))
+            _renderPath(path: UIBezierPath(ovalIn: CGRect(x: circle2.center.x - radius2, y: circle2.center.y - radius2, width: 2 * radius2, height: 2 * radius2)))
         }
         
         if (radius1 == 0 || radius2 == 0) {
@@ -182,7 +182,7 @@ class DBMetaballLoadingLayer: CALayer {
             u2 = 0.0
         }
         
-        let angle1 = center1.angleBetween(center2)
+        let angle1 = center1.angleBetween(point: center2)
         let angle2 = acos((radius1 - radius2) / d)
         let angle1a = angle1 + u1 + (angle2 - u1) * v
         let angle1b = angle1 - u1 - (angle2 - u1) * v
@@ -195,7 +195,7 @@ class DBMetaballLoadingLayer: CALayer {
         let p2b = center2.point(radians: angle2b, withLength: radius2)
         
         let totalRadius = radius1 + radius2
-        var d2 = min(v * handeLenRate, p1a.minus(p2a).length() / totalRadius)
+        var d2 = min(v * handeLenRate, p1a.minus(point: p2a).length() / totalRadius)
         d2 *= min(1, d * 2 / totalRadius)
         radius1 *= d2
         radius2 *= d2
@@ -206,12 +206,12 @@ class DBMetaballLoadingLayer: CALayer {
         let cp1b = p1b.point(radians: angle1b + CGFloat(M_PI_2), withLength: radius1)
         
         let pathJoinedCircles = UIBezierPath()
-        pathJoinedCircles.moveToPoint(p1a)
-        pathJoinedCircles.addCurveToPoint(p2a, controlPoint1: cp1a, controlPoint2: cp2a)
-        pathJoinedCircles.addLineToPoint(p2b)
-        pathJoinedCircles.addCurveToPoint(p1b, controlPoint1: cp2b, controlPoint2: cp1b)
-        pathJoinedCircles.addLineToPoint(p1a)
-        pathJoinedCircles.closePath()
-        _renderPath(pathJoinedCircles)
+        pathJoinedCircles.move(to: p1a)
+        pathJoinedCircles.addCurve(to: p2a, controlPoint1: cp1a, controlPoint2: cp2a)
+        pathJoinedCircles.addLine(to: p2b)
+        pathJoinedCircles.addCurve(to: p1b, controlPoint1: cp2b, controlPoint2: cp1b)
+        pathJoinedCircles.addLine(to: p1a)
+        pathJoinedCircles.close()
+        _renderPath(path: pathJoinedCircles)
     }
 }

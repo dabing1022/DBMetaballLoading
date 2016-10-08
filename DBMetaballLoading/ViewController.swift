@@ -73,8 +73,8 @@ class ViewController: UIViewController {
         changeSpacing(spacingSlider)
     }
     
-    @IBAction func switchLoadingViewStyle(sender: UISwitch) {
-        if sender.on {
+    @IBAction func switchLoadingViewStyle(_ sender: UISwitch) {
+        if sender.isOn {
             styleLabel.text = "loadingStyle: Fill"
             loadingView.loadingStyle = .Fill
         } else {
@@ -83,27 +83,27 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func changeFillColor(sender: UISlider) {
+    @IBAction func changeFillColor(_ sender: UISlider) {
         styleSwitcher.setOn(true, animated: true)
         switchLoadingViewStyle(styleSwitcher)
         
-        fillColorLabel.textColor = _colorByIndex(NSInteger(sender.value))
+        fillColorLabel.textColor = _colorByIndex(index: NSInteger(sender.value))
         loadingView.fillColor = fillColorLabel.textColor
         sender.minimumTrackTintColor = fillColorLabel.textColor
         sender.thumbTintColor = fillColorLabel.textColor
     }
     
-    @IBAction func changeStrokeColor(sender: UISlider) {
+    @IBAction func changeStrokeColor(_ sender: UISlider) {
         styleSwitcher.setOn(false, animated: true)
         switchLoadingViewStyle(styleSwitcher)
         
-        strokeColorLabel.textColor = _colorByIndex(NSInteger(sender.value))
+        strokeColorLabel.textColor = _colorByIndex(index: NSInteger(sender.value))
         loadingView.strokeColor = strokeColorLabel.textColor
         sender.minimumTrackTintColor = strokeColorLabel.textColor
         sender.thumbTintColor = strokeColorLabel.textColor
     }
     
-    @IBAction func changeBallRadius(sender: UISlider) {
+    @IBAction func changeBallRadius(_ sender: UISlider) {
         ballRadiusLabel.text = String(format: "ballRadius %.2f", sender.value)
         loadingView.ballRadius = CGFloat(sender.value)
         loadingView.resetAnimation()
@@ -112,13 +112,13 @@ class ViewController: UIViewController {
         maxDistanceSlider.maximumValue = ballRadiusSlider.maximumValue * 4
     }
     
-    @IBAction func changeMaxDistance(sender: UISlider) {
+    @IBAction func changeMaxDistance(_ sender: UISlider) {
         maxDistanceLabel.text = String(format: "maxDistance %.2f", sender.value)
         loadingView.maxDistance = CGFloat(sender.value)
         loadingView.resetAnimation()
     }
     
-    @IBAction func changeMv(sender: UISlider) {
+    @IBAction func changeMv(_ sender: UISlider) {
         styleSwitcher.setOn(false, animated: true)
         switchLoadingViewStyle(styleSwitcher)
         
@@ -127,7 +127,7 @@ class ViewController: UIViewController {
         loadingView.resetAnimation()
     }
     
-    @IBAction func changeHandleLenRate(sender: UISlider) {
+    @IBAction func changeHandleLenRate(_ sender: UISlider) {
         styleSwitcher.setOn(false, animated: true)
         switchLoadingViewStyle(styleSwitcher)
         
@@ -136,7 +136,7 @@ class ViewController: UIViewController {
         loadingView.resetAnimation()
     }
     
-    @IBAction func changeSpacing(sender: UISlider) {
+    @IBAction func changeSpacing(_ sender: UISlider) {
         spacingLabel.text = String(format: "spacing: %.2f", sender.value)
         loadingView.spacing = CGFloat(sender.value)
         loadingView.resetAnimation()
@@ -166,25 +166,25 @@ class ViewController: UIViewController {
     }
     
     func _colorByIndex(index: NSInteger) -> UIColor {
-        var color = UIColor.blackColor()
+        var color = UIColor.black
         switch index {
         case 0:
-            color = UIColor.orangeColor()
+            color = UIColor.orange
             break
         case 1:
-            color = UIColor.yellowColor()
+            color = UIColor.yellow
             break
         case 2:
-            color = UIColor.greenColor()
+            color = UIColor.green
             break
         case 3:
-            color = UIColor.cyanColor()
+            color = UIColor.cyan
             break
         case 4:
-            color = UIColor.redColor()
+            color = UIColor.red
             break
         default:
-            color = UIColor.blueColor()
+            color = UIColor.blue
         }
         
         return color

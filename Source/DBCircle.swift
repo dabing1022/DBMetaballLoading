@@ -25,7 +25,7 @@
 import UIKit
 
 struct DBCircle {
-    var center: CGPoint = CGPointZero
+    var center: CGPoint = CGPoint.zero
     var radius: CGFloat = 0.0
     
     var frame: CGRect {

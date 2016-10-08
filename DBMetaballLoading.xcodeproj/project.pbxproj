@@ -12,7 +12,6 @@
 		BDE8A07E1CE96D6800156166 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDE8A07C1CE96D6800156166 /* Main.storyboard */; };
 		BDE8A0801CE96D6800156166 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDE8A07F1CE96D6800156166 /* Assets.xcassets */; };
 		BDE8A0831CE96D6800156166 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDE8A0811CE96D6800156166 /* LaunchScreen.storyboard */; };
-		D58330C81D3C6804004355B0 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D58330C71D3C6804004355B0 /* README.md */; };
 		D58330CE1D3C681C004355B0 /* CGPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58330CA1D3C681C004355B0 /* CGPointExtension.swift */; };
 		D58330CF1D3C681C004355B0 /* DBCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58330CB1D3C681C004355B0 /* DBCircle.swift */; };
 		D58330D01D3C681C004355B0 /* DBMetaballLoadingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58330CC1D3C681C004355B0 /* DBMetaballLoadingLayer.swift */; };
@@ -114,11 +113,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Sketchingame;
 				TargetAttributes = {
 					BDE8A0741CE96D6800156166 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 6RUU9PN7NF;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -158,7 +159,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D58330C81D3C6804004355B0 /* README.md in Sources */,
 				BDE8A07B1CE96D6800156166 /* ViewController.swift in Sources */,
 				D58330D01D3C681C004355B0 /* DBMetaballLoadingLayer.swift in Sources */,
 				D58330CE1D3C681C004355B0 /* CGPointExtension.swift in Sources */,
@@ -204,8 +204,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -250,8 +252,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -270,6 +274,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -280,11 +285,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 6RUU9PN7NF;
 				INFOPLIST_FILE = DBMetaballLoading/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sketchingame.DBMetaballLoading;
+				PRODUCT_BUNDLE_IDENTIFIER = com.db.DBMetaballLoading;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -293,11 +300,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 6RUU9PN7NF;
 				INFOPLIST_FILE = DBMetaballLoading/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sketchingame.DBMetaballLoading;
+				PRODUCT_BUNDLE_IDENTIFIER = com.db.DBMetaballLoading;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
