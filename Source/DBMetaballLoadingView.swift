@@ -119,14 +119,14 @@ class DBMetaballLoadingView: UIView {
         startAnimation()
     }
     
-    func resumeAnimation() {
+    @objc func resumeAnimation() {
         if let animation = loadingAnimation {
             self.layer.add(animation, forKey: "loading")
         }
         resumeLayer(layer: self.layer)
     }
     
-    func pauseAnimation() {
+    @objc func pauseAnimation() {
         loadingAnimation = self.layer.animation(forKey: "loading")?.copy() as? CABasicAnimation
         pauseLayer(layer: self.layer)
     }

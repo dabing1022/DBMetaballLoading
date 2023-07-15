@@ -54,7 +54,7 @@ class DBMetaballLoadingLayer: CALayer {
     var strokeColor: UIColor = DefaultConfig.strokeColor
     var loadingStyle: LoadingStyle = .Fill
     
-    var movingBallCenterX : CGFloat = 0.0 {
+    @objc dynamic var movingBallCenterX : CGFloat = 0.0 {
         didSet {
             if (circlePaths.count > 0) {
                 circlePaths[0].center = CGPoint(x: movingBallCenterX, y: circlePaths[0].center.y)
