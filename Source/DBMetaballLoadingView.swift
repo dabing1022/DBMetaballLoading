@@ -91,8 +91,8 @@ class DBMetaballLoadingView: UIView {
     func _generalInit() {
         self.backgroundColor = UIColor.clear
         
-        NotificationCenter.default.addObserver(self, selector: #selector(resumeAnimation), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(pauseAnimation), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(resumeAnimation), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(pauseAnimation), name: UIApplication.didEnterBackgroundNotification, object: nil)
 
         startAnimation()
     }
@@ -105,7 +105,7 @@ class DBMetaballLoadingView: UIView {
         let loadingLayer = self.layer as! DBMetaballLoadingLayer
         loadingAnimation = CABasicAnimation(keyPath: "movingBallCenterX")
         loadingAnimation!.duration = 2.5
-        loadingAnimation!.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        loadingAnimation!.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         
         loadingAnimation!.fromValue = NSNumber(value: Float(loadingLayer.radius))
         loadingAnimation!.toValue = NSNumber(value: Float(loadingLayer.maxLength - loadingLayer.radius))

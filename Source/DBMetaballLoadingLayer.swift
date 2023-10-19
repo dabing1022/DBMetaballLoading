@@ -186,8 +186,8 @@ class DBMetaballLoadingLayer: CALayer {
         let angle2 = acos((radius1 - radius2) / d)
         let angle1a = angle1 + u1 + (angle2 - u1) * curveAngle
         let angle1b = angle1 - u1 - (angle2 - u1) * curveAngle
-        let angle2a = angle1 + CGFloat(M_PI) - u2 - (CGFloat(M_PI) - u2 - angle2) * curveAngle
-        let angle2b = angle1 - CGFloat(M_PI) + u2 + (CGFloat(M_PI) - u2 - angle2) * curveAngle
+        let angle2a = angle1 + CGFloat(Double.pi) - u2 - (CGFloat(Double.pi) - u2 - angle2) * curveAngle
+        let angle2b = angle1 - CGFloat(Double.pi) + u2 + (CGFloat(Double.pi) - u2 - angle2) * curveAngle
         
         let p1a = center1.point(radians: angle1a, withLength: radius1)
         let p1b = center1.point(radians: angle1b, withLength: radius1)
@@ -200,10 +200,10 @@ class DBMetaballLoadingLayer: CALayer {
         radius1 *= d2
         radius2 *= d2
         
-        let cp1a = p1a.point(radians: angle1a - CGFloat(M_PI_2), withLength: radius1)
-        let cp2a = p2a.point(radians: angle2a + CGFloat(M_PI_2), withLength: radius2)
-        let cp2b = p2b.point(radians: angle2b - CGFloat(M_PI_2), withLength: radius2)
-        let cp1b = p1b.point(radians: angle1b + CGFloat(M_PI_2), withLength: radius1)
+        let cp1a = p1a.point(radians: angle1a - CGFloat(Double.pi / 2), withLength: radius1)
+        let cp2a = p2a.point(radians: angle2a + CGFloat(Double.pi / 2), withLength: radius2)
+        let cp2b = p2b.point(radians: angle2b - CGFloat(Double.pi / 2), withLength: radius2)
+        let cp1b = p1b.point(radians: angle1b + CGFloat(Double.pi / 2), withLength: radius1)
         
         let pathJoinedCircles = UIBezierPath()
         pathJoinedCircles.move(to: p1a)
